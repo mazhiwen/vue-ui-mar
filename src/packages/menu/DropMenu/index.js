@@ -1,4 +1,5 @@
 import DropMenu from "./DropMenu.vue";
+import Menu from "../Menu.vue";
 
 import Vue from "vue";
 
@@ -30,7 +31,9 @@ const activeDropMenu = (params)=>{
 
 const DropMenuPlugin = {
   install(Vue){
-    Vue.component(activeDropMenu.name,activeDropMenu);
+    Vue.component(Menu.name, Menu);
+
+    // Vue.component(activeDropMenu.name,activeDropMenu);
     Vue.prototype.$dropMenu = activeDropMenu;
   }
 };
