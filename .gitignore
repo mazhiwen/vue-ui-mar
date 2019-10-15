@@ -9,7 +9,7 @@
 # production
 /build
 /dist
-# /lib
+/lib
 # misc
 .DS_Store
 .env.local
