@@ -10,7 +10,7 @@ module.exports = {
     app: ['./src/packages/index.js']
   },
   output: {
-    path: path.resolve(process.cwd(), '../lib'),
+    path: path.resolve(__dirname, '../lib'),
     publicPath: '/dist/',
     filename: 'mar-ui.common.js',
     chunkFilename: '[id].js',
@@ -39,7 +39,7 @@ module.exports = {
   module: {
     rules: [{
         test: /\.(jsx?|babel|es6)$/,
-        include: process.cwd(),
+        // include: process.cwd(),
         // exclude: config.jsexclude,
         loader: 'babel-loader'
       },

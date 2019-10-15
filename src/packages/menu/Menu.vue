@@ -61,7 +61,7 @@ console.log(copy);
 const scrollStep = 150;
 
 export default {
-  name: "mar-menu",
+  name: "MarMenu",
   props: {
     data: {
       type: Array,

@@ -12,11 +12,13 @@ import store from './store';
 
 
 import App from './App.vue';
-import DropMenuPlugin from "./packages/menu/DropMenu";
+import MARUI from "./packages";
+// import MARUI from 'vue-ui-mar';
+console.log(MARUI);
 
-
+Vue.use(MARUI);
 Vue.use(VueRouter);
-Vue.use(DropMenuPlugin);
+// Vue.use(DropMenuPlugin);
 
 
 const router = new VueRouter({

@@ -12,7 +12,7 @@
     <p v-if="show">hello</p>
   </transition>
 
-  <mar-menu
+  <MarMenu
     :data="[
       {
         label:'22'
@@ -30,11 +30,11 @@
 <script>
 import request from 'request';
 
-// import Menu from "./packages/menu/Menu.vue";
+// import MarMenu from "./packages/menu/Menu.vue";
 
 export default {
   components:{
-    // Menu
+    // MarMenu
   },
   data() {
     return {

@@ -1,9 +1,21 @@
 # vue ui组件开发
 
 
+## 编译发布
 
+```sh
+#编译生成lib目录
+yarn dist
+```
 
+## 本地调试
 
+```js
+// src/index.js修改MARUI引用为./packages
+```
+```sh
+yarn start
+```
 
 
 ## 参考elementui的内容
