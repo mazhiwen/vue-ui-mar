@@ -32,13 +32,11 @@ const activeDropMenu = (params)=>{
 const DropMenuPlugin = {
   install(Vue){
     Vue.component(Menu.name, Menu);
-
-    // Vue.component(activeDropMenu.name,activeDropMenu);
     Vue.prototype.$dropMenu = activeDropMenu;
   }
 };
 
-export default DropMenuPlugin;
-
+// export default DropMenuPlugin;
+export default activeDropMenu;
 
 
