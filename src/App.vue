@@ -23,7 +23,12 @@
     ]"
   />
 
+  <pre>
+    <span>.a{
+      sds</span>
+    <span>}</span>
 
+  </pre>
   </div>
 </template>
 
