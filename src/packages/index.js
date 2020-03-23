@@ -1,9 +1,12 @@
-import Menu from './menu/Menu.vue';
-import dropMenu from './menu/DropMenu/index.js';
+import Menu from './Menu/Menu.vue';
+import dropMenu from './Menu/DropMenu/index.js';
+import Edit from './Edit/Edit';
 
+import EditorDataController from './Edit/EditorDataController';
 
 const components = [
   Menu,
+  Edit,
 ];
 
 
@@ -13,6 +16,7 @@ const install = function (Vue, opts = {}) {
     Vue.component(component.name, component);
   });
   Vue.prototype.$dropMenu = dropMenu;
+  Vue.prototype.$EditorDataController = EditorDataController;
 };
 
 
@@ -24,4 +28,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   version: 'fk',
   install,
+  // EditorDataController,
 };

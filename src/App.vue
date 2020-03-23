@@ -14,13 +14,15 @@
         }
       ]"
     />
+    <MarEdit
+      :data-controller="ruleDataController"
+    />
   </div>
 </template>
 
 <script>
 import request from 'request';
 
-// import MarMenu from "./packages/menu/Menu.vue";
 
 export default {
   components: {
@@ -30,9 +32,13 @@ export default {
     return {
       msg: 'Hello w2222orld!',
       show: true,
+      ruleDataController: new this.$EditorDataController.DataController({
+      }),
     };
   },
-
+  beforeCreate() {
+    // this.ruleDataController =
+  },
 };
 </script>
 
