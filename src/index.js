@@ -12,7 +12,7 @@ import store from './store';
 
 
 import App from './App.vue';
-import MARUI from "./packages";
+import MARUI from './packages';
 // import MARUI from 'vue-ui-mar';
 console.log(MARUI);
 

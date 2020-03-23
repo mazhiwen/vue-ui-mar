@@ -7,7 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    app: ['./src/packages/index.js']
+    app: ['./src/packages/index.js'],
   },
   output: {
     path: path.resolve(__dirname, '../lib'),
@@ -16,58 +16,58 @@ module.exports = {
     chunkFilename: '[id].js',
     libraryExport: 'default',
     library: 'MARUI',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     // alias: config.alias,
-    modules: ['node_modules']
+    modules: ['node_modules'],
   },
   // externals: config.externals,
-  externals:{
-    vue: 'vue'
+  externals: {
+    vue: 'vue',
   },
   performance: {
-    hints: false
+    hints: false,
   },
   stats: {
-    children: false
+    children: false,
   },
   optimization: {
-    minimize: false
+    minimize: false,
   },
   module: {
     rules: [{
-        test: /\.(jsx?|babel|es6)$/,
-        // include: process.cwd(),
-        // exclude: config.jsexclude,
-        loader: 'babel-loader'
+      test: /\.(jsx?|babel|es6)$/,
+      // include: process.cwd(),
+      // exclude: config.jsexclude,
+      loader: 'babel-loader',
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        compilerOptions: {
+          preserveWhitespace: false,
+        },
       },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
-          }
-        }
+    },
+    {
+      test: /\.css$/,
+      loaders: ['style-loader', 'css-loader'],
+    },
+    {
+      test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
+      loader: 'url-loader',
+      query: {
+        limit: 10000,
+        name: path.posix.join('static', '[name].[hash:7].[ext]'),
       },
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      }
-    ]
+    },
+    ],
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin()
-  ]
+    new VueLoaderPlugin(),
+  ],
 };
