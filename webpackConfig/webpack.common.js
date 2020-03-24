@@ -1,3 +1,6 @@
+
+// 该文件好像是参考eleui 的编译
+
 const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');

@@ -1,8 +1,8 @@
 {
-  "name": "webpack-vue",
-  "version": "1.0.0",
-  "description": "webpack vue",
-  "main": "index.js",
+  "name": "vue-ui-mar",
+  "version": "1.0.3",
+  "description": "vue ui组件库",
+  "main": "lib/mar-ui.common.js",
   "scripts": {
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,9 @@
   },
   "keywords": [
     "webpack",
-    "vue"
+    "vue",
+    "ui",
+    "tab"
   ],
   "author": "Marjoven",
   "license": "ISC",

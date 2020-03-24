@@ -1,25 +1,33 @@
 # vue ui组件开发
 
+## 问题记录
+
+需要增加发布到npm功能
 
 ## 编译发布
 
-```sh
-#编译生成lib目录
+1. yarn dist 编译生成lib目录
+1. 修改package.json版本  
+1. npm login  marjoven  *****  
+1. npm publish
+
+## 本地测试
+
 yarn dist
-```
+nodemodule添加vue-ui-mar
+将dist生成的js放到vue-ui-mar
 
 ## 本地调试
 
 ```js
 // src/index.js修改MARUI引用为./packages
 ```
+
 ```sh
 yarn start
 ```
 
-
 ## 参考elementui的内容
-
 
 ### elementui的build流程
 
@@ -49,4 +57,3 @@ yarn start
 - build/bin/build-entry
 
 通过模版生成src/index.js
-
