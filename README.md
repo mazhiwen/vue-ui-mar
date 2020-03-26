@@ -2,29 +2,26 @@
 
 ## 问题记录
 
-需要增加发布到npm功能
+需要增加编译css功能
+以及单独的编辑器组件npm发布
+内置编辑器datacontro
 
-## 编译发布
-
-1. yarn dist 编译生成lib目录
-1. 修改package.json版本  
-1. npm login  marjoven  *****  
-1. npm publish
-
-## 本地测试
-
-yarn dist
-nodemodule添加vue-ui-mar
-将dist生成的js放到vue-ui-mar
-
-## 本地调试
-
-```js
-// src/index.js修改MARUI引用为./packages
-```
+## 安装使用
 
 ```sh
-yarn start
+yarn add vue-ui-mar
+```
+
+```js
+import MARUI from 'vue-ui-mar';
+Vue.use(MARUI);
+```
+
+```html
+<!-- 编辑器引用 -->
+<MarEdit
+  :data-controller="ruleDataController"
+/>
 ```
 
 ## 参考elementui的内容
@@ -39,7 +36,6 @@ yarn start
                 node build/bin/i18n.js &
                 node build/bin/version.js
                 `,
-
   "dist": `
           npm run clean &&
           npm run build:file &&
@@ -51,9 +47,31 @@ yarn start
           npm run build:umd &&
           npm run build:theme
           `,
+  // css生成
+  "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+
 }
+
 ```
 
 - build/bin/build-entry
 
 通过模版生成src/index.js
+
+## 编译发布
+
+1. yarn dist 编译生成lib目录
+1. 修改package.json版本  
+1. npm login  marjoven  *****  
+1. npm publish
+
+## 本地测试
+
+1. yarn dist
+2. nodemodule目录添加vue-ui-mar
+3. 将dist生成的js放到vue-ui-mar
+
+## 本地调试
+
+1. src/index.js修改MARUI引用为./packages
+1. yarn start

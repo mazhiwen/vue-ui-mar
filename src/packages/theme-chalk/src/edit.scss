@@ -1,0 +1,115 @@
+.m_edit{
+  display: flex;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 500;
+  background: white;
+  border: 1px solid #ddd;
+  height: 400px;
+  min-height: 400px;
+  .edit_fonttest{
+    position: absolute;
+    opacity: 0;
+    left: -15px;
+  }
+
+  //马治文 规则编辑相关样式
+  .rownum_wrap{
+    border-right: 1px solid #ddd;
+    background-color: #f7f7f7;
+    width: 29px;
+    text-align: right;
+    font-size: 14px;
+    z-index: 200;
+    li{
+      height: 25px;
+      background-color: #f7f7f7;
+      line-height: 25px;
+      color: #999;
+      padding: 0 3px 0 5px;
+      font-size: 12px;
+      list-style: none;
+    }
+  }
+  .m_edit_wrap{
+    padding: 0 4px;
+    flex-grow: 1;
+    height: calc(100% - 10px);
+    // max-height: 630px;
+    // height: 100%;
+    font-size: 14px;
+    word-break: break-all;
+    // overflow-x: hidden;
+    // overflow-y: hidden;
+    // border:1px solid black;
+    cursor: text;
+    // padding: 7px 0;
+    position: relative;
+    .m_edit_cursorwrap{
+      position: absolute;
+      >div{
+        border-left:1px solid red;
+        height: 21px;
+        margin: 2px auto;
+      }
+    }
+    .e_edit_selectwrap{
+      .m_select_firstline,.m_select_middleline,.m_select_lastline,.m_selectline{
+        background: #d9d9d9;
+        position: absolute;
+        z-index: -1;
+        height: 25px;
+      }
+      .m_select_firstline,.m_select_lastline{
+        height: 25px;
+      }
+    }
+    .e_edit_textareawrap{
+      position: relative;
+      height: 0;
+      background: red;
+      overflow: hidden;
+      >textarea{
+        position: absolute;
+        bottom: -1em;
+        padding: 0px;
+        width: 1000px;
+        height: 1em;
+        outline: none;
+      }
+    }
+    .unitItem{
+      padding: 3px 0px;
+      // background: gray;
+      // border:1px solid red;
+      // letter-spacing: 3px;
+      &.item_dragging{
+        border: 1px dashed black;
+      }
+      &.item_operator{
+        // color: black;
+      }
+      &.item_function{
+        color: #00f;
+      }
+      &.item_number{
+        color: #164;
+      }
+      &.item_function_use{
+        color: #05a;
+      }
+      &.item_keyword{
+        color: #708;
+      }
+    }
+    .rowtext_wrap{
+      height: 25px;
+      line-height: 25px;
+      user-select: none;
+      pre {
+        // padding: 0 4px;
+      }
+    }
+
+  }
+}

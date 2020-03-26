@@ -1,8 +1,8 @@
-import Menu from './Menu/Menu.vue';
-import dropMenu from './Menu/DropMenu/index.js';
-import Edit from './Edit/Edit';
+import Menu from './menu/Menu.vue';
+import dropMenu from './menu/DropMenu/index.js';
+import Edit from './edit/Edit';
 
-import EditorDataController from './Edit/EditorDataController';
+import EditorDataController from './edit/EditorDataController';
 
 const components = [
   Menu,
