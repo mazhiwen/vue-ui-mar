@@ -1,4 +1,6 @@
-import Vue from './node_modules/vue';
+// import Vue from './node_modules/vue';
+import Vue from 'vue';
+
 import DropMenu from './DropMenu.vue';
 import Menu from '../Menu.vue';
 

@@ -8,12 +8,13 @@ import VueRouter from 'vue-router';
 import {
   routes,
 } from 'router';
-import MARUI from 'vue-ui-mar';
+// import MARUI from 'vue-ui-mar';
 import store from './store';
 
 
 import App from './App.vue';
-// import MARUI from './packages';
+import MARUI from './packages';
+
 console.log(MARUI);
 
 Vue.use(MARUI);

@@ -17,9 +17,6 @@
       class="m_edit_wrap"
       @dragover="onEditAreaDragover($event)"
       @drop="onEditAreaDrop($event)"
-      @mousedown="onMouseDown($event)"
-      @mouseup="onMouseUp($event)"
-      @mousemove="onMouseMove($event)"
     >
       <div
         class="edit_fonttest"
@@ -36,6 +33,30 @@
         class="m_edit_cursorwrap"
       >
         <div />
+      </div>
+      <div
+        :style="{
+          visibility: dataController.mentionData.visible?'visible':'hidden',
+          left: `${dataController.mentionData.left}px`,
+          top: `${dataController.mentionData.top}px`
+        }"
+        class="m_edit_mentionWrap"
+      >
+        <ul>
+          <li
+            v-for="(value,index) in dataController.mentionData.list"
+            :key="index"
+            @click="mentionItemClick(value)"
+          >
+            <span
+              v-for="(valueL,indexL) in value.splitText"
+              :key="indexL"
+              :class="{mentionkeyword:valueL.type == 'key'}"
+            >
+              {{ valueL.text }}
+            </span>
+          </li>
+        </ul>
       </div>
       <div
         class="e_edit_textareawrap"
@@ -63,32 +84,13 @@
             width: `${value.width}px`
           }"
         />
-        <!-- <div
-          class="m_select_firstline"
-          :style="{
-            left: `${dataController.selectFirstLine.left}px`,
-            top: `${dataController.selectFirstLine.top}px`,
-            width: `${dataController.selectFirstLine.width}px`
-          }"
-        />
-        <div
-          class="m_select_middleline"
-          :style="{
-            left: `${dataController.selectMiddleLine.left}px`,
-            top: `${dataController.selectMiddleLine.top}px`,
-            width: `${dataController.selectMiddleLine.width}px`
-          }"
-        />
-        <div
-          class="m_select_lastline"
-          :style="{
-            left: `${dataController.selectLastLine.left}px`,
-            top: `${dataController.selectLastLine.top}px`,
-            width: `${dataController.selectLastLine.width}px`
-          }"
-        /> -->
       </div>
-      <div>
+      <div
+        class="m_edit_contentwrap"
+        @mousedown="onMouseDown($event)"
+        @mouseup="onMouseUp($event)"
+        @mousemove="onMouseMove($event)"
+      >
         <div
           v-for="(value,index) in textData"
           :key="index"
@@ -111,21 +113,28 @@
 import EditUnitList from '../EditUnitList';
 
 export default {
-  name: 'MarEdit',
   components: {
     EditUnitList,
   },
   props: {
-    data: {
-      type: Array,
+    content: {
+      type: String,
       default() {
-        return [];
+        return '';
       },
     },
     dataController: {
       type: Object,
       default() {
         return {
+        };
+      },
+    },
+    config: {
+      type: Object,
+      default() {
+        return {
+
         };
       },
     },
@@ -144,26 +153,62 @@ export default {
   },
   computed: {
   },
+  watch: {
+    config: {
+      handler(newV) {
+        this.dataController.mergeConfig(newV);
+      },
+      deep: true,
+      immediate: true,
+    },
+    content: {
+      handler(newV) {
+        this.dataController.insertTxts(newV);
+        this.dataController.focusTextarea();
+      },
+      immediate: true,
+    },
+  },
   created() {
     this.addGlobalEvent();
     this.textData = this.dataController.textData;
+    // const fontTestDom = document.createElement('div');
+    // document.body.appendChild();
   },
   mounted() {
-    this.dataController.characterWidth = this.$refs.fonttestNum.getBoundingClientRect().width;
-    this.dataController.CNWidth = this.$refs.fonttestCN.getBoundingClientRect().width;
+    // this.dataController.characterWidth = this.$refs.fonttestNum.getBoundingClientRect().width;
+    // this.dataController.CNWidth = this.$refs.fonttestCN.getBoundingClientRect().width;
+    // 保存DOM ref引用
+    this.dataController.editRef = this.$refs.edit;
+    this.dataController.fonttestNumRef = this.$refs.fonttestNum;
+    this.dataController.fonttestCNRef = this.$refs.fonttestCN;
+    this.dataController.getBoundingData();
+    // 光标事件
     this.cursorInterval = setInterval(() => {
       this.cursorVisble = 'hidden';
       setTimeout(() => {
         this.cursorVisble = 'visible';
       }, 700);
     }, 1400);
-    this.dataController.editWrapRect = this.$refs.edit.getBoundingClientRect();
+    // this.dataController.editWrapRect = this.$refs.edit.getBoundingClientRect();
     this.dataController.inputTexareaDom = this.$refs.textarea;
+    this.dataController.initFocus();
   },
   beforeDestroy() {
     clearInterval(this.cursorInterval);
   },
   methods: {
+    // vue v-show当前组件时，会造成当前组件mounted的时候未能获取到正确的clientrect。需要重新active
+    // getBoundingData() {
+    //   this.dataController.editWrapRect = this.$refs.edit.getBoundingClientRect();
+    //   this.dataController.characterWidth = this.$refs.fonttestNum.getBoundingClientRect().width;
+    //   this.dataController.CNWidth = this.$refs.fonttestCN.getBoundingClientRect().width;
+    // },
+    mentionItemClick(item) {
+      //
+      console.log(item);
+      this.dataController.replaceFocusToMentionWord(item);
+    },
     onTextareaPaste(e) { // 粘贴
       e.preventDefault();
       const pasteTxt = (e.clipboardData || window.clipboardData).getData('text');
@@ -184,7 +229,8 @@ export default {
       }
     },
     onMouseUp(e) {
-      console.log('onMouseUp', e);
+      console.log('外层onMouseUp', e);
+      this.dataController.getBoundingData();
       this.dataController.initFocus();
     },
     stopMouseMove() {
@@ -192,9 +238,12 @@ export default {
     },
     // textarea每次输入新的值会触发input事件
     onTextAreaChange(e) {
-      console.log('onTextAreaChange', e);
+      console.log('onTextAreaChange', e.data);
       if (e.data != null) {
-        this.dataController.onIputNewTxt(e.data);
+        this.dataController.editText({
+          newTxt: e.data,
+          isAddTxt: true,
+        });
       }
     },
     addGlobalEvent() {
@@ -214,7 +263,7 @@ export default {
         this.dataController.copy(e);
       });
       document.addEventListener('keydown', (e) => {
-        console.log(e);
+        // console.log(e);
         const {
           keyCode, altKey, ctrlKey, metaKey, shiftKey,
         } = e;
@@ -226,7 +275,7 @@ export default {
 
           }
         } else if (keyCode === 8) { // 删除
-          this.dataController.deleteCharacter();
+          this.dataController.onDelete();
         } else if (keyCode === 13) { // 回车键
           this.dataController.onEnterClick();
         } else if (keyCode === 37) { // 左
@@ -239,9 +288,7 @@ export default {
           this.dataController.cursorMoveDown();
         } else if (keyCode === 9) { // tab键
           e.preventDefault();
-          this.dataController.addTxts({
-            newTxt: '  ',
-          });
+          this.dataController.addTxts('  ');
         }
 
         // 判断键盘按键为有效输入字符

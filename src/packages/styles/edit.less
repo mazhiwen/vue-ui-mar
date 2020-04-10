@@ -1,4 +1,4 @@
-.m_edit{
+.m_edit {
   display: flex;
   overflow-y: scroll;
   position: relative;
@@ -7,21 +7,23 @@
   border: 1px solid #ddd;
   height: 400px;
   min-height: 400px;
-  .edit_fonttest{
+
+  .edit_fonttest {
     position: absolute;
     opacity: 0;
     left: -15px;
   }
 
   //马治文 规则编辑相关样式
-  .rownum_wrap{
+  .rownum_wrap {
     border-right: 1px solid #ddd;
     background-color: #f7f7f7;
     width: 29px;
     text-align: right;
     font-size: 14px;
     z-index: 200;
-    li{
+
+    li {
       height: 25px;
       background-color: #f7f7f7;
       line-height: 25px;
@@ -31,7 +33,8 @@
       list-style: none;
     }
   }
-  .m_edit_wrap{
+
+  .m_edit_wrap {
     padding: 0 4px;
     flex-grow: 1;
     height: calc(100% - 10px);
@@ -45,31 +48,77 @@
     cursor: text;
     // padding: 7px 0;
     position: relative;
-    .m_edit_cursorwrap{
+
+    .m_edit_contentwrap {
+      height: 100%;
+    }
+
+    .m_edit_cursorwrap {
       position: absolute;
-      >div{
-        border-left:1px solid red;
+
+      >div {
+        border-left: 1px solid red;
         height: 21px;
         margin: 2px auto;
       }
     }
-    .e_edit_selectwrap{
-      .m_select_firstline,.m_select_middleline,.m_select_lastline,.m_selectline{
+
+    .m_edit_mentionWrap {
+      position: absolute;
+      width: 250px;
+      max-height: 200px;
+      background: rgb(243, 243, 243);
+      border: 1px solid rgb(215, 215, 215);
+      overflow: auto;
+
+      ul {
+        padding: 1px;
+      }
+
+      li {
+        // font-size: 13px;
+        display: flex;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgb(232, 232, 232);
+        }
+
+        span {
+          // font-size: 13px;
+        }
+      }
+
+      .mentionkeyword {
+        color: rgb(13, 110, 195);
+      }
+    }
+
+    .e_edit_selectwrap {
+
+      .m_select_firstline,
+      .m_select_middleline,
+      .m_select_lastline,
+      .m_selectline {
         background: #d9d9d9;
         position: absolute;
         z-index: -1;
         height: 25px;
       }
-      .m_select_firstline,.m_select_lastline{
+
+      .m_select_firstline,
+      .m_select_lastline {
         height: 25px;
       }
     }
-    .e_edit_textareawrap{
+
+    .e_edit_textareawrap {
       position: relative;
       height: 0;
       background: red;
       overflow: hidden;
-      >textarea{
+
+      >textarea {
         position: absolute;
         bottom: -1em;
         padding: 0px;
@@ -78,34 +127,51 @@
         outline: none;
       }
     }
-    .unitItem{
+
+    .unitItem {
       padding: 3px 0px;
+
       // background: gray;
       // border:1px solid red;
       // letter-spacing: 3px;
-      &.item_dragging{
+      &.item_dragging {
         border: 1px dashed black;
       }
-      &.item_operator{
-        // color: black;
+
+      &.item_operator {
+        color: coral;
       }
-      &.item_function{
-        color: #00f;
+
+      &.item_function {
+        color: rgb(143, 94, 101);
       }
-      &.item_number{
+
+      &.item_number {
         color: #164;
       }
-      &.item_function_use{
+
+      &.item_functionuse {
         color: #05a;
       }
-      &.item_keyword{
+
+      &.item_keyword {
+        color: blue;
+      }
+
+      &.item_condition {
         color: #708;
       }
+
+      &.item_main {
+        color: rgb(0, 16, 128);
+      }
     }
-    .rowtext_wrap{
+
+    .rowtext_wrap {
       height: 25px;
       line-height: 25px;
       user-select: none;
+
       pre {
         // padding: 0 4px;
       }

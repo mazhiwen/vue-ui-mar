@@ -3,7 +3,6 @@
     class="rowtext_wrap"
     @mousedown="onRowMouseDown($event)"
     @mouseup="onRowMouseUp($event)"
-    @mousemove="onRowMouseOver($event)"
   >
     <pre
       ref="rowDomRef"
@@ -81,10 +80,9 @@ export default {
         this.rowIndex,
       );
     },
-    onRowMouseOver(e) {
-    },
     onRowMouseUp(e) {
       e.stopPropagation();
+      this.dataController.getBoundingData();
       this.dataController.onRowMouseUp(e, this.rowIndex);
     },
     onUnitMouseDown(e, data, focusUnitIndexInRow) {
@@ -107,6 +105,7 @@ export default {
     },
     onUnitMouseUp(e, data, focusUnitIndexInRow) {
       e.stopPropagation();
+      this.dataController.getBoundingData();
       this.dataController.onUnitMouseUp(
         focusUnitIndexInRow,
         this.rowIndex,

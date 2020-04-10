@@ -73,6 +73,7 @@
     "axios": "^0.19.0",
     "localforage": "^1.7.3",
     "lodash": "^4.17.11",
+    "lokijs": "^1.5.8",
     "nprogress": "^0.2.0",
     "sass-resources-loader": "^2.0.1",
     "utility-mar": "^1.0.27",
