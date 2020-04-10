@@ -1,7 +1,7 @@
 <template>
   <div
-    class="m_menuitem_box"
     ref="current_menuitem_ref"
+    class="m_menuitem_box"
     :class="{
       'm_menuitem_box_rowtype':!isSecondLevel&&!isRootLevel,
       'm_menuitem_box_leftwrap':isLeftWrap
@@ -19,12 +19,12 @@
         class="item_label"
         @click="itemClick(value,getItemIndex(value,`${indexPre}${startIndex+index}`))"
       >
-        {{value.label}}
+        {{ value.label }}
         <span
           v-if="value.labelExtra"
           class="itemnum"
         >
-          ({{value.labelExtra}})
+          ({{ value.labelExtra }})
         </span>
         <template
           v-if="value.children&&value.children.length>0"
@@ -36,8 +36,7 @@
               'm_menuicon_up':value.childVisible,
               'm_menuicon_down':!value.childVisible,
             }"
-          >
-          </i>
+          />
           <i
             v-else
             class="m_menu_icon el-icon-arrow-right"
@@ -45,17 +44,16 @@
               'm_menuicon_right':!value.childVisible,
               'm_menuicon_left':value.childVisible,
             }"
-          >
-          </i>
+          />
         </template>
       </div>
       <transition name="fade">
         <MenuItem
           v-if="
             !isRootLevel
-            &&value.children
-            &&value.children.length>0
-            &&value.childVisible
+              &&value.children
+              &&value.children.length>0
+              &&value.childVisible
           "
           :indexPre="`${indexPre}${startIndex+index}-`"
           :data="value.children"
@@ -69,105 +67,105 @@
 
 <script>
 
-const getItemIndex = function(value, index) {
+const getItemIndex = function (value, index) {
   return {
     value: value.value ? value.value.toString() : `${index}`,
-    index: `${index}`
+    index: `${index}`,
   };
 };
 
 
 let movingFromRoot;
 export default {
-  name: "MenuItem",
+  name: 'MenuItem',
+  components: {},
+  filters: {
+    getItemIndex: getItemIndex,
+  },
   // inject: ["onItemClick"],
   props: {
     dataController: Object,
     indexPre: {
       type: String,
-      default: ""
+      default: '',
     },
     data: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     isRootLevel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isSecondLevel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // startIndex: [Number]
     startIndex: {
       type: Number,
-      default: 0
+      default: 0,
     },
     isLeftWrap: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
-  components: {},
   data() {
     return {
-      shouldChildrenLeftWrap: false
+      shouldChildrenLeftWrap: false,
     };
-  },
-  filters: {
-    getItemIndex: getItemIndex
   },
   computed: {
   },
-  created() {},
   watch: {
 
 
   },
+  created() {},
   mounted() {
   },
-  updated(){
+  updated() {
   },
   beforeDestroy() {},
   methods: {
 
     getItemIndex,
     mouseenter(item, event, index) {
-      if(this.isRootLevel){
-        let rect = event.target.getBoundingClientRect();
+      if (this.isRootLevel) {
+        const rect = event.target.getBoundingClientRect();
         this.$dropMenu({
           dataController: this.dataController,
           data: item.children,
           left: rect.left,
           top: rect.bottom,
           visible: true,
-          indexPre: `${this.startIndex+index}-`,
-          dropMenuFixRight: rect.left > (document.body.clientWidth -200),
-          item
+          indexPre: `${this.startIndex + index}-`,
+          dropMenuFixRight: rect.left > (document.body.clientWidth - 200),
+          item,
         });
-      }else{
-        if(this.$refs["current_menuitem_ref"]){
-          this.shouldChildrenLeftWrap =  this.isLeftWrap || this.$refs["current_menuitem_ref"].getBoundingClientRect().right > (document.body.clientWidth -200);
+      } else {
+        if (this.$refs.current_menuitem_ref) {
+          this.shouldChildrenLeftWrap = this.isLeftWrap || this.$refs.current_menuitem_ref.getBoundingClientRect().right > (document.body.clientWidth - 200);
         }
       }
       item.childVisible = true;
     },
-    mouseleave(item,event,index) {
-      if(this.isRootLevel){
-        let rect = event.target.getBoundingClientRect();
-        const { clientX , clientY } = event;
+    mouseleave(item, event, index) {
+      if (this.isRootLevel) {
+        const rect = event.target.getBoundingClientRect();
+        const { clientX, clientY } = event;
         // 判断是否鼠标滑动到子菜单
-        if(clientX > rect.left && clientX < rect.right, clientY >= rect.bottom){
-        }else{
+        if (clientX > rect.left && clientX < rect.right, clientY >= rect.bottom) {
+        } else {
           this.$dropMenu({
             dataController: this.dataController,
-            visible: false
+            visible: false,
           });
           item.childVisible = false;
         }
-      }else{
+      } else {
         item.childVisible = false;
       }
     },
@@ -176,10 +174,9 @@ export default {
       this.dataController.sendItemClick({
         index,
         item,
-        value
+        value,
       });
-    }
-  }
+    },
+  },
 };
 </script>
-

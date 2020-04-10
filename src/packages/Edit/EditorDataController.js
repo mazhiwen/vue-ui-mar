@@ -818,7 +818,7 @@ DataController.prototype.addTxt = function ({
   newTxt,
 }) {
   // console.log('addTxt', this.focusUnitIndexInRow, this.focusChaIndexInUnit, this.editUnitListData);
-  const rowData = null;
+  let rowData = null;
   if (!this.textData[this.focusRowIndex]) {
     this.textData.splice(this.focusRowIndex, 1, []);
   }

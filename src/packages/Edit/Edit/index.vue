@@ -113,6 +113,7 @@
 import EditUnitList from '../EditUnitList';
 
 export default {
+  name: 'MarEdit',
   components: {
     EditUnitList,
   },
