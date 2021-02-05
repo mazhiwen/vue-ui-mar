@@ -75,3 +75,7 @@ Vue.use(MARUI);
 
 1. src/index.js修改MARUI引用为./packages
 1. yarn start
+
+## profile
+
+--profile --json > compilation-stats.json

@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: #123456;
+}
+.m_edit {
+  display: flex;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 500;
+  background: white;
+  border: 1px solid #ddd;
+  height: 400px;
+  min-height: 400px;
+}
+.m_edit .edit_fonttest {
+  position: absolute;
+  opacity: 0;
+  left: -15px;
+}
+.m_edit .rownum_wrap {
+  border-right: 1px solid #ddd;
+  background-color: #f7f7f7;
+  width: 29px;
+  text-align: right;
+  font-size: 14px;
+  z-index: 200;
+}
+.m_edit .rownum_wrap li {
+  height: 25px;
+  background-color: #f7f7f7;
+  line-height: 25px;
+  color: #999;
+  padding: 0 3px 0 5px;
+  font-size: 12px;
+  list-style: none;
+}
+.m_edit .m_edit_wrap {
+  padding: 0 4px;
+  flex-grow: 1;
+  height: calc(100% - 10px);
+  font-size: 14px;
+  word-break: break-all;
+  cursor: text;
+  position: relative;
+}
+.m_edit .m_edit_wrap .m_edit_contentwrap {
+  height: 100%;
+}
+.m_edit .m_edit_wrap .m_edit_cursorwrap {
+  position: absolute;
+}
+.m_edit .m_edit_wrap .m_edit_cursorwrap > div {
+  border-left: 1px solid red;
+  height: 21px;
+  margin: 2px auto;
+}
+.m_edit .m_edit_wrap .m_edit_mentionWrap {
+  position: absolute;
+  width: 250px;
+  max-height: 200px;
+  background: #f3f3f3;
+  border: 1px solid #d7d7d7;
+  overflow: auto;
+}
+.m_edit .m_edit_wrap .m_edit_mentionWrap ul {
+  padding: 1px;
+}
+.m_edit .m_edit_wrap .m_edit_mentionWrap li {
+  display: flex;
+  cursor: pointer;
+}
+.m_edit .m_edit_wrap .m_edit_mentionWrap li:hover {
+  background-color: #e8e8e8;
+}
+.m_edit .m_edit_wrap .m_edit_mentionWrap .mentionkeyword {
+  color: #0d6ec3;
+}
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_select_firstline,
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_select_middleline,
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_select_lastline,
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_selectline {
+  background: #d9d9d9;
+  position: absolute;
+  z-index: -1;
+  height: 25px;
+}
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_select_firstline,
+.m_edit .m_edit_wrap .e_edit_selectwrap .m_select_lastline {
+  height: 25px;
+}
+.m_edit .m_edit_wrap .e_edit_textareawrap {
+  position: relative;
+  height: 0;
+  background: red;
+  overflow: hidden;
+}
+.m_edit .m_edit_wrap .e_edit_textareawrap > textarea {
+  position: absolute;
+  bottom: -1em;
+  padding: 0px;
+  width: 1000px;
+  height: 1em;
+  outline: none;
+}
+.m_edit .m_edit_wrap .unitItem {
+  padding: 3px 0px;
+}
+.m_edit .m_edit_wrap .unitItem.item_dragging {
+  border: 1px dashed black;
+}
+.m_edit .m_edit_wrap .unitItem.item_operator {
+  color: coral;
+}
+.m_edit .m_edit_wrap .unitItem.item_function {
+  color: #8f5e65;
+}
+.m_edit .m_edit_wrap .unitItem.item_number {
+  color: #164;
+}
+.m_edit .m_edit_wrap .unitItem.item_functionuse {
+  color: #05a;
+}
+.m_edit .m_edit_wrap .unitItem.item_keyword {
+  color: blue;
+}
+.m_edit .m_edit_wrap .unitItem.item_condition {
+  color: #708;
+}
+.m_edit .m_edit_wrap .unitItem.item_main {
+  color: #001080;
+}
+.m_edit .m_edit_wrap .rowtext_wrap {
+  height: 25px;
+  line-height: 25px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
