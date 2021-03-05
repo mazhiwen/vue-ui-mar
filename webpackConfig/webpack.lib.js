@@ -7,6 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 const commonOptions = require('./commonOptions');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // const config = require('./config');
 
@@ -15,18 +16,28 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    menu: ['./src/packages/menu/index.js'],
-    edit: ['./src/packages/edit/index.js'],
+    menu: ['./packages/menu/index.js'],
+    edit: ['./packages/edit/index.js'],
+    // app: ['./packages/index.js'],
   },
   output: {
     path: path.resolve(__dirname, '../lib'),
     filename: '[name]/index.js',
+    // libraryExport: 'default',
+    // libraryTarget: 'commonjs2',
+    
     // publicPath: '/dist/',
     // filename: 'mar-ui.common.js',
     // chunkFilename: '[id].js',
-    // libraryExport: 'default',
     // library: 'MARUI',
-    // libraryTarget: 'commonjs2',
+
+
+
+    // filename: "MyLibrary.[name].js",
+		library: ["MyLibrary", "[name]"],
+		libraryTarget: "umd"
+
+    
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -35,7 +46,7 @@ module.exports = {
       configs: path.resolve(__dirname, '../src/configs'),
       router: path.resolve(__dirname, '../src/router'),
       views: path.resolve(__dirname, '../src/views'),
-      styles: path.resolve(__dirname, '../src/styles'),
+      style: path.resolve(__dirname, '../src/style'),
       images: path.resolve(__dirname, '../src/images'),
       components: path.resolve(__dirname, '../src/components'),
       filters: path.resolve(__dirname, '../src/filters'),
@@ -103,12 +114,27 @@ module.exports = {
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
     // 提取css到单独文件的插件
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: '[name]/style.css',
-      chunkFilename: '[id]/style.css',
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name]/style.css',
+    //   chunkFilename: '[id]/style.css',
+    // }),
+    new CopyWebpackPlugin([
+      {
+        from: './packages/style/*',
+        to: path.resolve(__dirname, '../lib/style'),
+        flatten: true,
+      },
+      {
+        from: './packages/edit/style/*',
+        to: path.resolve(__dirname, '../lib/edit/style'),
+        flatten: true,
+      },
+      {
+        from: './packages/menu/style/*',
+        to: path.resolve(__dirname, '../lib/menu/style'),
+        flatten: true,
+      },
+    ]),
     new webpack.optimize.SplitChunksPlugin({
       // ************************默认
       // chunks: 'all', // 默认async

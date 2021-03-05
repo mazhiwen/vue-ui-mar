@@ -12,13 +12,17 @@ import store from './store';
 
 
 import App from './App.vue';
-// import MARUI from 'vue-ui-mar';
 
-import MARUI from './packages';
+import {menu} from 'vue-ui-mar';
+// import MARUI from 'packages';
+// import 'packages/menu/styles';
+require('vue-ui-mar/lib/common');
 
-console.log(MARUI);
+var aaa = require('vue-ui-mar/lib/menu');
 
-Vue.use(MARUI);
+console.log(aaa);
+
+// Vue.use(MARUI);
 Vue.use(VueRouter);
 // Vue.use(DropMenuPlugin);
 

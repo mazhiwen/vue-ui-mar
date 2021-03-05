@@ -79,3 +79,7 @@ Vue.use(MARUI);
 ## profile
 
 --profile --json > compilation-stats.json
+
+## 按需打包
+
+yarn lib

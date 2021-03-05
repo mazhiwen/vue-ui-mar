@@ -111,6 +111,7 @@ module.exports = {
       images: path.resolve(__dirname, '../src/images'),
       components: path.resolve(__dirname, '../src/components'),
       request: path.resolve(__dirname, '../src/request'),
+      packages: path.resolve(__dirname, '../packages'),
     },
     // 配置默认import index的文件扩展名
     extensions: ['.js', '.json', '.vue', '.less', '.css'],
